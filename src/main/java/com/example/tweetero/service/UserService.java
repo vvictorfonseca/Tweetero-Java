@@ -15,16 +15,16 @@ import com.example.tweetero.repository.UserRepsitory;
 public class UserService {
 
   @Autowired
-  private UserRepsitory userRepsitory;
+  private UserRepsitory repository;
 
   public ResponseEntity<User> userSignUp(userDto signUp) {
-    Optional<User> userExist = userRepsitory.findByUsername(signUp.username());
-
-    if (!userExist.isPresent()) {
+    Optional<User> usernameExist = repository.findByUsername(signUp.username());
+    
+    if(usernameExist.isPresent()) {
       return new ResponseEntity<>(HttpStatus.CONFLICT);
     }
 
-    userRepsitory.save(new User(signUp));
+    repository.save(new User(signUp));
     return new ResponseEntity<>(HttpStatus.CREATED);
   }
   

@@ -1,8 +1,6 @@
 package com.example.tweetero.model;
 
-import org.springframework.web.jsf.FacesContextUtils;
-
-import com.example.tweetero.dto.userDto;
+import com.example.tweetero.dto.tweetDto;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,21 +14,21 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "users")
-public class User {
+@Table(name = "tweets")
+public class Tweet {
 
-  public User(userDto data) {
-    this.username = data.username();
-    this.avatar = data.avatar();
+  public Tweet(tweetDto data) {
+    this.username =  data.username();
+    this.tweet =  data.tweet();
   }
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  @Column(length = 30, nullable = false)
+  @Column(nullable = false, length = 30)
   private String username;
 
-  @Column(nullable = false)
-  private String avatar;
+  @Column(nullable = false, length = 280)
+  private String tweet;
 }
