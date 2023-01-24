@@ -17,7 +17,7 @@ public class UserService {
   @Autowired
   private UserRepsitory repository;
 
-  public ResponseEntity<User> userSignUp(userDto signUp) {
+  public ResponseEntity<String> userSignUp(userDto signUp) {
     Optional<User> usernameExist = repository.findByUsername(signUp.username());
     
     if(usernameExist.isPresent()) {
@@ -25,7 +25,7 @@ public class UserService {
     }
 
     repository.save(new User(signUp));
-    return new ResponseEntity<>(HttpStatus.CREATED);
+    return new ResponseEntity<>("OK", HttpStatus.CREATED);
   }
   
 }
